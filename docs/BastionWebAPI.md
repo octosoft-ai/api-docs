@@ -30,7 +30,7 @@ POST /api/v1/generateAuthToken
 
 **Notes:**
 
-- Replace **_Base64EncodedCredentials_** with the Base64 encoding of the vendor's username and password in the format **_username:password_**.
+- Replace **_Base64EncodedCredentials_** with the Base64 encoding of the vendor's username and password in the format `username:password`.
 
 **Example Response:**
 

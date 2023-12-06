@@ -100,10 +100,15 @@ GET /api/v1/password-reset/:email
 
 ---
 
+## Broker
+
 ### `Get broker plans`
 
 - **HTTP Method:** `GET`
 - **Endpoint:** `/api/v1/plans/`
+- **Request Headers:**
+  - `Content-Type`: application/json
+  - `Authorization`: Bearer `{{token}}`
 
 **Example Usage:**
 
@@ -111,12 +116,16 @@ GET /api/v1/password-reset/:email
 GET /api/v1/plans/
 ```
 
+**Notes:**
+
+- Replace `{{token}}` with the response from the [`generateAuthToken`](#generate-auth-token) API.
+
 **Example Response:**
 
 ```json
 {
   "statusCode": 200,
-  "message": "Broker Plan Retrieved Successfully!",
+  "message": "Broker Plans Retrieved Successfully!",
   "data": [
     {
       "name": "Gold Plan",
@@ -148,12 +157,19 @@ GET /api/v1/plans/
 - **Endpoint:** `/api/v1/plans/:id`
 - **Parameters:**
   - `id` (required) - ID of the vendor.
+- **Request Headers:**
+  - `Content-Type`: application/json
+  - `Authorization`: Bearer `{{token}}`
 
 **Example Usage:**
 
 ```http
 GET /api/v1/plans/:id
 ```
+
+**Notes:**
+
+- Replace `{{token}}` with the response from the [`generateAuthToken`](#generate-auth-token) API.
 
 **Example Response:**
 
@@ -178,12 +194,19 @@ GET /api/v1/plans/:id
 - **Endpoint:** `/api/v1/webhook/vendors/member-details/:reference`
 - **Parameters:**
   - `reference` (required) - Member reference.
+- **Request Headers:**
+  - `Content-Type`: application/json
+  - `Authorization`: Bearer `{{token}}`
 
 **Example Usage:**
 
 ```http
 GET /api/v1/webhook/vendors/member-details/:reference
 ```
+
+**Notes:**
+
+- Replace `{{token}}` with the response from the [`generateAuthToken`](#generate-auth-token) API.
 
 **Example Response:**
 
@@ -195,7 +218,7 @@ GET /api/v1/webhook/vendors/member-details/:reference
         "firstName": "John",
         "lastName": "Doe",
         "memberGroup": string,
-        "state": "Published" | "Draft"
+        "state": string
     }
 }
 ```
@@ -208,12 +231,19 @@ GET /api/v1/webhook/vendors/member-details/:reference
 - **Endpoint:** `/api/v1/webhook/vendors/get-policy/:payCode`
 - **Parameters:**
   - `payCode` (required) - Payment code of the policy.
+- **Request Headers:**
+  - `Content-Type`: application/json
+  - `Authorization`: Bearer `{{token}}`
 
 **Example Usage:**
 
 ```http
 GET /api/v1/webhook/vendors/get-policy/:payCode
 ```
+
+**Notes:**
+
+- Replace `{{token}}` with the response from the [`generateAuthToken`](#generate-auth-token) API.
 
 **Example Response:**
 
@@ -243,12 +273,19 @@ GET /api/v1/webhook/vendors/get-policy/:payCode
 - **Endpoint:** `/api/v1/webhook/vendors/policy-details/:reference`
 - **Parameters:**
   - `reference` (required) - Policy reference.
+- **Request Headers:**
+  - `Content-Type`: application/json
+  - `Authorization`: Bearer `{{token}}`
 
 **Example Usage:**
 
 ```http
 GET /api/v1/webhook/vendors/policy-details/:reference
 ```
+
+**Notes:**
+
+- Replace `{{token}}` with the response from the [`generateAuthToken`](#generate-auth-token) API.
 
 **Example Response:**
 
@@ -279,15 +316,47 @@ GET /api/v1/webhook/vendors/policy-details/:reference
 
 ---
 
-### `Notify payment` <-----------
+### `Notify payment`
 
 - **HTTP Method:** `POST`
-- **Endpoint:** `/api/v1/webhook/vendors/:gid?`
+- **Endpoint:** `/api/v1/webhook/vendors/:gid`
 - **Parameters:**
   - `gid` (optional) - ID of the vendor.
 - **Request Body**:
-  - `vendorId` (required) - ID of the vendor.
+  - `reference` (type: boolean, required) - Payment reference.
   - `name` (required) - Name of vendor.
+  - `vendorId` (required) - ID of the vendor.
+  - `plan_id` (required).
+  - `paymentPlan` (type: number, required)
+  - `isReactivatePolicy` (type: boolean).
+  - `narration`
+  - `customer` (type: object)
+    - `firstName` (type: string, required) - First name.
+    - `middleName` (type: string) - Middle name.
+    - `lastName` (type: string, required) - Last name.
+    - `maidenName` (type: string) - Maiden name.
+    - `dob` (type: date, required) - Date of birth.
+    - `gender` (type: string) - Gender. Allowed values: 'Male', 'Female'.
+    - `phone` (type: string, required) - Phone number. Must be a valid phone number.
+    - `email` (type: string, required) - Email address. Must be a valid email.
+    - `relation` (type: string, required) - Relationship status. Allowed values: [List of allowed relations].
+    - `maritalStatus` (type: number, required) - Marital status. Allowed values: [List of allowed marital statuses].
+    - `country` (type: number, required) - Country code.
+    - `state` (type: number, required) - State code.
+    - `city` (type: number, required) - City code.
+    - `address` (type: string, required) - Residential address.
+    - `genotype` (type: number) - Genotype. Allowed values: [List of allowed genotypes].
+    - `bloodGroup` (type: number) - Blood group. Allowed values: [List of allowed blood groups].
+    - `religion` (type: number) - Religion. Allowed values: [List of allowed religions].
+    - `employeeId` (type: string) - Employee ID.
+    - `nationalId` (type: string) - National ID.
+    - `ninNumber` (type: string) - NIN (National Identification Number).
+    - `height` (type: number) - Height.
+    - `weight` (type: number) - Weight.
+  - `dependants` (type: customer[])
+- **Request Headers:**
+  - `Content-Type`: application/json
+  - `Authorization`: Bearer `{{token}}`
 
 **Example Usage:**
 
@@ -295,14 +364,18 @@ GET /api/v1/webhook/vendors/policy-details/:reference
 POST /api/v1/webhook/vendors/:gid?
 ```
 
+**Notes:**
+
+- Replace `{{token}}` with the response from the [`generateAuthToken`](#generate-auth-token) API.
+
 **Example Response:**
 
 ```json
-{
-    "statusCode": 200,
-    "message": "Payment Notification Received!",
-    "data":
-}
+  {
+    "status": true,
+    "message": "sucessfully onboarded ${membersOnboarded.length}",
+    "membersOnboarded": membersOnboarded[]
+  }
 ```
 
 ---
@@ -322,9 +395,7 @@ POST /policy-payments/callback
 
 ```json
 {
-  "statusCode": 200,
-  "message": "Payment Notification Received for Policy!",
-  "data": null
+  "status": 200
 }
 ```
 

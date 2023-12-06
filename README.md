@@ -2,16 +2,33 @@
 
 **Base URL:** https://demo-web.bastionhmo.com/
 
+## Auth
+
 ### `Generate auth token`
 
 - **HTTP Method:** `POST`
 - **Endpoint:** `/api/v1/generateAuthToken`
+- **Request Body:**
+  - `vendorId` (required) - ID of Vendor.
+  - `expiresIn` (type: numbe4, required) - Time token expires in seconds.
+- **Request Headers:**
+  - `Content-Type`: application/json
+  - `Authorization`: Basic Base64EncodedCredentials
 
 **Example Usage:**
 
 ```http
 POST /api/v1/generateAuthToken
+
+{
+  "vendorId": "exampleVendorId",
+  "expiresIn": 3600
+}
 ```
+
+**Notes:**
+
+- Replace **_Base64EncodedCredentials_** with the Base64 encoding of the vendor's username and password in the format **_username:password_**.
 
 **Example Response:**
 
@@ -26,9 +43,9 @@ POST /api/v1/generateAuthToken
 ### `Change Password`
 
 - **HTTP Method:** `POST`
-- **Endpoint:** `/api/v1/change-password/:token?`
+- **Endpoint:** `/api/v1/change-password/:token`
 - **Parameters:**
-  - `token` (required) - ID of the vendor.
+  - `token` (required) - Authentication token.
 - **Request Body**:
   - `oldPassword` (required) - New password for the vendor.
   - `newPassword` (required) - New password for the vendor.
@@ -49,9 +66,11 @@ POST /api/v1/change-password/:token
 
 ```json
 {
-  "statusCode": 200,
-  "status": true,
-  "message": "Password Successfully updated!"
+  "status": 200,
+  "body": {
+    "success": true,
+    "message": "Password Successfully updated!"
+  }
 }
 ```
 
@@ -60,14 +79,14 @@ POST /api/v1/change-password/:token
 ### `Reset password`
 
 - **HTTP Method:** `GET`
-- **Endpoint:** `/api/v1/password-reset/:email?`
+- **Endpoint:** `/api/v1/password-reset/:email`
 - **Parameters:**
   - `email` (required) - Email of the vendor.
 
 **Example Usage:**
 
 ```http
-GET /api/v1/password-reset/:email?
+GET /api/v1/password-reset/:email
 ```
 
 **Example Response:**

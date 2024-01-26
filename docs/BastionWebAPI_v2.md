@@ -4,8 +4,7 @@
  - **Dev:** https://demo-web.bastionhmo.com/
  - **Prod:** https://live-web.bastionhmo.com/
 
-## Auth
-
+## 1 Auth
 
 **Auth Types:**
   -  0. No auth
@@ -27,48 +26,42 @@
   - `Content-Type`: application/json
   - `api-key`: AuthType i or ii
  
+ 
 
-### `Generate auth token`
+### 1.1 `Generate auth token`
 
 - **Auth Type:** `Auth Type I`
 - **HTTP Method:** `POST`
-- **Endpoint:** `/api/v1/generateAuthToken`
+- **Endpoint:** `/api/v2/auth/generateAuthToken`
 - **Request Body:**
-  - `vendorId` (required) - ID of Vendor.
-  - `expiresIn` (type: numbe4, required) - Time token expires in seconds.
+  - `expiresIn` (type: number, required) - Time token expires in seconds.
 
 **Example Usage:**
 
 ```http
-POST /api/v1/generateAuthToken
+POST /api/v2/auth/generateAuthToken
 
 {
-  "vendorId": "exampleVendorId",
   "expiresIn": 3600
 }
 ```
-
-**Notes:**
-
-- Replace **_Base64EncodedCredentials_** with the Base64 encoding of the vendor's username and password in the format `username:password`.
 
 **Example Response:**
 
 ```json
 {
+  "status": true,
   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
 }
 ```
 
 ---
 
-### `Change Password`
+### 1.2 `Change Password`
 
 - **Auth Type:** `Auth Type II`
 - **HTTP Method:** `POST`
-- **Endpoint:** `/api/v1/change-password/:token`
-- **Parameters:**
-  - `token` (required) - Authentication token.
+- **Endpoint:** `/api/v2/auth/change-password`
 - **Request Body**:
   - `oldPassword` (required) - New password for the vendor.
   - `newPassword` (required) - New password for the vendor.
@@ -77,7 +70,7 @@ POST /api/v1/generateAuthToken
 **Example Usage:**
 
 ```http
-POST /api/v1/change-password/:token
+POST /api/v2/auth/change-password
 {
   "oldPassword": "formerSecurePassword",
   "newPassword": "newSecurePassword",
@@ -89,8 +82,7 @@ POST /api/v1/change-password/:token
 
 ```json
 {
-  "status": 200,
-  "body": {
+  "data": {
     "success": true,
     "message": "Password Successfully updated!"
   }
@@ -99,150 +91,141 @@ POST /api/v1/change-password/:token
 
 ---
 
-### `Reset password`
+### 1.3 `Reset password`
 
-- **Auth Type:** `Auth Type 0 - No Auth`
+- **Auth Type:** `Auth Type 0 - No auth required`
 - **HTTP Method:** `GET`
-- **Endpoint:** `/api/v1/password-reset/:email`
+- **Endpoint:** `/api/v2/password-reset?email={email}`
 - **Parameters:**
   - `email` (required) - Email of the vendor.
 
 **Example Usage:**
 
 ```http
-GET /api/v1/password-reset/:email
+GET /api/v2/password-reset?email=johndoe@getnada.com
 ```
 
 **Example Response:**
 
 ```json
 {
-  "statusCode": 200,
+  "status": true,
   "message": "Successful!"
 }
 ```
 
 ---
 
-## Broker
+## 2 Broker
 
-### `Get broker plans`
+### 2.1 `Get broker plans`
 
 - **Auth Type:** `Auth Type II`
 - **HTTP Method:** `GET`
-- **Endpoint:** `/api/v1/plans/`
+- **Endpoint:** `/api/v2/vendors/plans`
 
 **Example Usage:**
 
 ```http
-GET /api/v1/plans/
+GET /api/v2/vendors/plans
 ```
 
 **Example Response:**
 
 ```json
 {
-  "statusCode": 200,
+  "status": true,
   "message": "Broker Plans Retrieved Successfully!",
   "data": [
     {
+      "id": 10052,
       "name": "Gold Plan",
       "description": "Lorem ipsum dolor sit amet...",
       "category": "string",
-      "state": "Published"
+      "state": "Published",
+      "premium": 64500.00
     },
-    {
-      "name": "Silver Plan",
-      "description": "Lorem ipsum dolor sit amet...",
-      "category": "string",
-      "state": "Draft"
-    },
-    {
-      "name": "Silver Plan",
-      "description": "Lorem ipsum dolor sit amet...",
-      "category": "string",
-      "state": "Published"
-    }
   ]
 }
 ```
 
 ---
 
-### `Get broker plan`
+### 2.2 `Get broker plan`
 
-- **Auth Type:** `Auth Type II`
 - **HTTP Method:** `GET`
-- **Endpoint:** `/api/v1/plans/:id`
+- **Endpoint:** `/api/v2/vendors/plans/:id`
 - **Parameters:**
-  - `id` (required) - ID of the vendor.
+  - `id` (required) - ID of the plan retrieved from the GET broker plans API.
 
 **Example Usage:**
 
 ```http
-GET /api/v1/plans/:id
+GET /api/v2/vendors/plans/:id
 ```
 
 **Example Response:**
 
 ```json
 {
-    "statusCode": 200,
+    "status": true,
     "message": "Broker Plan Retrieved Successfully!",
     "data": {
+        "id": 10052,
         "name": "Gold Plan",
         "description": "Lorem ipsum dolor sit amet...",
         "category": "string",
-        "state": "Published" | "Draft"
+        "state": "Published",
+        "premium": 64500.00
     }
 }
 ```
 
 ---
 
-### `Get member details`
+### 2.3 `Get member details`
 
 - **Auth Type:** `Auth Type II`
 - **HTTP Method:** `GET`
-- **Endpoint:** `/api/v1/webhook/vendors/member-details/:reference`
+- **Endpoint:** `/api/v2/vendors/member-details/:reference`
 - **Parameters:**
   - `reference` (required) - Member reference.
 
 **Example Usage:**
 
 ```http
-GET /api/v1/webhook/vendors/member-details/:reference
+GET /api/v2/vendors/member-details/:reference
 ```
 
 **Example Response:**
 
 ```json
 {
-    "statusCode": 200,
+    "status": true,
     "message": "Member Details Retrieved Successfully!",
     "data": {
         "firstName": "John",
         "lastName": "Doe",
-        "memberGroup": string,
-        "state": string
+        "memberGroup": "",
+        "state": ""
     }
 }
 ```
 
 ---
 
-### `Get policy by paycode`
+### 2.4 `Get policy by paycode`
 
 - **Auth Type:** `Auth Type II`
 - **HTTP Method:** `GET`
-- **Endpoint:** `/api/v1/webhook/vendors/get-policy/:payCode`
+- **Endpoint:** `/api/v2/vendors/get-policy/:payCode`
 - **Parameters:**
   - `payCode` (required) - Payment code of the policy.
 
 **Example Usage:**
 
 ```http
-GET /api/v1/webhook/vendors/get-policy/:payCode
+GET /api/v2/vendors/get-policy/:payCode
 ```
 
 **Example Response:**
@@ -267,25 +250,24 @@ GET /api/v1/webhook/vendors/get-policy/:payCode
 
 ---
 
-### `Get policy details`
+### 2.5 `Get policy details`
 
-- **Auth Type:** `Auth Type II`
 - **HTTP Method:** `GET`
-- **Endpoint:** `/api/v1/webhook/vendors/policy-details/:reference`
+- **Endpoint:** `/api/v2/vendors/policy-details/:reference`
 - **Parameters:**
   - `reference` (required) - Policy reference.
 
 **Example Usage:**
 
 ```http
-GET /api/v1/webhook/vendors/policy-details/:reference
+GET /api/v2/vendors/policy-details/:reference
 ```
 
 **Example Response:**
 
 ```json
 {
-    "statusCode": 200,
+    "status": true,
     "message": "Policy Details Retrieved Successfully!",
     "data": {
       "id": '007',
@@ -310,17 +292,67 @@ GET /api/v1/webhook/vendors/policy-details/:reference
 
 ---
 
-### `Notify payment`
+### 2.6 `Notify payment`
+
+- **Enums**
+
+  - Marital Status
+    - Single = 1
+    - Married = 2
+    - Divorced = 3
+    - Widowed = 4
+    - SingleParents = 5
+
+  - Payment Plan
+    - Annually    = 1
+    - Bi-annually = 2
+    - Quaterly    = 4
+    - Monthly     = 12
+
+  - Genotype
+    - AA = 1
+    - AO = 2
+    - BB = 3
+    - BO = 4
+    - OO = 5
+    - AS = 6
+
+  - Blood Group
+    - "A+" = 1
+    - "O+" = 2
+    - "B+" = 3
+    - "AB+" = 4
+    - "A-" = 5
+    - "O-" = 6
+    - "B-" = 7
+    - "AB-" = 8
+
+  - Religion
+    - Islam = 1
+    - Christianity = 2
+    - Hinduism = 3
+    - Buddhism = 4
+    - Other = 5
+
+  - Relation
+    - Spouse = "Spouse"
+    - Son = "Son"
+    - Sibling = "Sibling"
+    - Daughter = "Daughter"
+    - Mother = "Mother"
+    - Father = "Father"
+    - Grand Father = "Grand Father"
+    - Grand Mother = "Grand Mother"
+    - Cousin = "Cousin"
+    - Friend = "Friend"
+    - Other = "Other"
+
 
 - **Auth Type:** `Auth Type II`
 - **HTTP Method:** `POST`
-- **Endpoint:** `/api/v1/webhook/vendors/:gid`
-- **Parameters:**
-  - `gid` (optional) - ID of the vendor.
+- **Endpoint:** `/api/v2/webhook/vendors`
 - **Request Body**:
   - `reference` (type: boolean, required) - Payment reference.
-  - `name` (required) - Name of vendor.
-  - `vendorId` (required) - ID of the vendor.
   - `plan_id` (required).
   - `paymentPlan` (type: number, required)
   - `isReactivatePolicy` (type: boolean).
@@ -348,12 +380,13 @@ GET /api/v1/webhook/vendors/policy-details/:reference
     - `ninNumber` (type: string) - NIN (National Identification Number).
     - `height` (type: number) - Height.
     - `weight` (type: number) - Weight.
+    - `externalRef` (type: number) - The customer's external reference or ID that uniquely identifies the customer on the vendor's platform.
   - `dependants` (type: customer[])
 
 **Example Usage:**
 
 ```http
-POST /api/v1/webhook/vendors/:gid?
+POST /api/v2/webhook/vendors
 ```
 
 **Example Response:**
@@ -361,8 +394,157 @@ POST /api/v1/webhook/vendors/:gid?
 ```json
   {
     "status": true,
-    "message": "sucessfully onboarded"
+    "message": "Members onboarded sucessfully!",
+    "data": {
+      "membersDetails": [
+        {
+          "firstName": "John",
+          "lastName": "Doe",
+          ...(all other customer data provided during onboarding)
+          "octohealthMemberId": "100020001",
+          "externalRef": "VENDOR-A-012345",
+        }
+      ],
+      "issuedPolicy": {
+        "reference": "REF-190934134",
+        "policyNo": "23409",
+        "policyId": "POL-1248901",
+        "status": "active",
+        "startDate": "2024-01-31",
+        "nextPaymentDate": "2025-01-29"
+      }
+    }
   }
 ```
 
+
 ---
+
+## 3 Vendor API Config
+
+### 3.1 `Update notification webhook URL`
+
+- **Auth Type:** `Auth Type II`
+- **HTTP Method:** `PATCH`
+- **Endpoint:** `/api/v2/vendors/config`
+- **Request Body**:
+  - `webhookURL` (type: URI, required) - Vendor's notification webhookURL.
+  - `webhookAccessKey` (type: string) - Access key for request authorization
+
+**Example Usage:**
+
+```http
+PATCH /api/v2/vendors/config
+```
+
+**Example Response:**
+
+```json
+{
+  "status": true,
+  "message": "Configuration updated successfully!"
+}
+```
+
+---
+
+## 4 Vendor Webhook Notification Events DataTypes
+
+### 4.1 `Issued Policy event datatype`
+
+- **HTTP Method:** `POST`
+- **Endpoint:** `{{vendor's specified webhook URL}}`
+
+**Example Event:**
+
+```http
+POST {{vendor's specified webhook URL}}
+```
+
+**Example Event Payload:**
+
+```json
+{
+  "event": "policy-issued",
+  "accessKey": "{{Vendor's specified access key}}",
+  "data": {
+    "reference": "REF-190934134",
+    "policyNo": "23409",
+    "policyId": "POL-1248901",
+    "status": "active",
+    "startDate": "2024-01-31",
+    "nextPaymentDate": "2025-01-29"
+  }
+}
+```
+
+### 4.2 `Member Onboard event datatype`
+
+- **HTTP Method:** `POST`
+- **Endpoint:** `{{vendor's specified webhook URL}}`
+
+**Example Event:**
+
+```http
+POST {{vendor's specified webhook URL}}
+```
+
+**Example Event Payload:**
+
+```json
+{
+  "event": "added-policy-member",
+  "accessKey": "{{Vendor's specified access key}}",
+  "data": {
+    "firstName": "John",
+    "lastName": "Doe",
+    ...(all other customer data provided during onboarding)
+    "octohealthMemberId": "100020001",
+    "externalRef": "VENDOR-A-012345",
+  }
+}
+```
+
+
+---
+
+## 5 Providers List
+
+### 5.1 `Get providers list`
+
+- **Auth Type:** `Auth Type II`
+- **HTTP Method:** `GET`
+- **Endpoint:** `/api/v2/vendors/providers-list`
+
+**Example Usage:**
+
+```http
+GET /api/v2/vendors/providers-list
+```
+
+**Example Response:**
+
+```json
+{
+  "status": true,
+  "message": "Providers List Retrieved Successfully!",
+  "data": [
+    {
+      "name": "ABC Health",
+      "category": "category",
+      "email": "abc@health.com",
+      "phone": "+234909291111111",
+      "code": "ABC-HEALTH",
+      "addressLine1": "Address line 1",
+      "addressLine2": "Address line 2",
+      "state": "Lagos",
+      "city": "Ikeja",
+      "longitude": "0.000000024",
+      "latitude": "0.000232108",
+      "rating": "5"
+    },
+  ]
+}
+```
+
+```

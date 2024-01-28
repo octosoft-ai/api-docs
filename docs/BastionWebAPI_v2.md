@@ -8,33 +8,30 @@
 
 **Auth Types:**
   -  0. No auth
-  ***Notes:***
     - No authorization token is required
     
-  -  I. `Api-key (Basic)`  - `api-key: "Base64Encode(username:password)"`
-  ***Notes:***
-    - Vendor's credentials (username and password) will be shared during onboarding.
-    - Example: `api-key: "YWRQxQA3dvcmtaW46UGFzc=="` - after the credentials have been encoded
+  -  I. `Api-key (Basic)`: `api-key: "Base64Encode(username:password)"`
+     - Vendor's credentials (username and password) will be shared during onboarding.
+     - Example: `api-key: "YWRQxQA3dvcmtaW46UGFzc=="` - after the credentials have been encoded
 
-  - II. `Api-key (Bearer)` - `api-key: {{auth_token}}`
-  ***Notes:***
+  - II. `Api-key (Bearer)`: `api-key: {{auth_token}}`
     - The `auth_token` can be retrieved as described in session 1.1 below
     - Example: `api-key: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwHMiLCJpYXQiOjE2NjAwNTcm92aWRlciI6InVuaWZpZWRfcGF5bWVudA1MTk2MjN9.AS13xG_MOXTKKfpYKGYHfArjPULtq4uMJ_CNpa_ACBp"`
 
 
 **Request Headers:**
   - `Content-Type`: application/json
-  - `api-key`: AuthType i or ii
+  - `api-key`: AuthType I or II
  
  
 
 ### 1.1 `Generate auth token`
 
-- **Auth Type:** `Auth Type I`
+- **Auth:** `Auth Type I`
 - **HTTP Method:** `POST`
 - **Endpoint:** `/api/v2/auth/generateAuthToken`
 - **Request Body:**
-  - `expiresIn` (type: number, required) - Time token expires in seconds.
+  - `expiresIn` (type: number, optional) - Time token expires in seconds. When no value is set, the token does not expire.
 
 **Example Usage:**
 
@@ -93,16 +90,16 @@ POST /api/v2/auth/change-password
 
 ### 1.3 `Reset password`
 
-- **Auth Type:** `Auth Type 0 - No auth required`
+- **Auth:** `Auth Type 0 - No auth required`
 - **HTTP Method:** `GET`
-- **Endpoint:** `/api/v2/password-reset?email={email}`
+- **Endpoint:** `/api/v2/auth/password-reset?email={email}`
 - **Parameters:**
   - `email` (required) - Email of the vendor.
 
 **Example Usage:**
 
 ```http
-GET /api/v2/password-reset?email=johndoe@getnada.com
+GET /api/v2/auth/password-reset?email=johndoe@getnada.com
 ```
 
 **Example Response:**
@@ -120,7 +117,7 @@ GET /api/v2/password-reset?email=johndoe@getnada.com
 
 ### 2.1 `Get broker plans`
 
-- **Auth Type:** `Auth Type II`
+- **Auth:** `Auth Type II`
 - **HTTP Method:** `GET`
 - **Endpoint:** `/api/v2/vendors/plans`
 
@@ -153,10 +150,11 @@ GET /api/v2/vendors/plans
 
 ### 2.2 `Get broker plan`
 
+- **Auth:** `Auth Type II`
 - **HTTP Method:** `GET`
 - **Endpoint:** `/api/v2/vendors/plans/:id`
 - **Parameters:**
-  - `id` (required) - ID of the plan retrieved from the GET broker plans API.
+  - `id` (required) - ID of the plan retrieved from the `GET broker plans` API, section 2.1 above.
 
 **Example Usage:**
 
@@ -185,7 +183,7 @@ GET /api/v2/vendors/plans/:id
 
 ### 2.3 `Get member details`
 
-- **Auth Type:** `Auth Type II`
+- **Auth:** `Auth Type II`
 - **HTTP Method:** `GET`
 - **Endpoint:** `/api/v2/vendors/member-details/:reference`
 - **Parameters:**
@@ -216,7 +214,7 @@ GET /api/v2/vendors/member-details/:reference
 
 ### 2.4 `Get policy by paycode`
 
-- **Auth Type:** `Auth Type II`
+- **Auth:** `Auth Type II`
 - **HTTP Method:** `GET`
 - **Endpoint:** `/api/v2/vendors/get-policy/:payCode`
 - **Parameters:**
@@ -252,6 +250,7 @@ GET /api/v2/vendors/get-policy/:payCode
 
 ### 2.5 `Get policy details`
 
+- **Auth:** `Auth Type II`
 - **HTTP Method:** `GET`
 - **Endpoint:** `/api/v2/vendors/policy-details/:reference`
 - **Parameters:**
@@ -306,7 +305,7 @@ GET /api/v2/vendors/policy-details/:reference
   - Payment Plan
     - Annually    = 1
     - Bi-annually = 2
-    - Quaterly    = 4
+    - Quarterly   = 4
     - Monthly     = 12
 
   - Genotype
@@ -348,11 +347,11 @@ GET /api/v2/vendors/policy-details/:reference
     - Other = "Other"
 
 
-- **Auth Type:** `Auth Type II`
+- **Auth:** `Auth Type II`
 - **HTTP Method:** `POST`
 - **Endpoint:** `/api/v2/webhook/vendors`
 - **Request Body**:
-  - `reference` (type: boolean, required) - Payment reference.
+  - `reference` (type: string, required) - Payment reference.
   - `plan_id` (required).
   - `paymentPlan` (type: number, required)
   - `isReactivatePolicy` (type: boolean).
@@ -380,7 +379,7 @@ GET /api/v2/vendors/policy-details/:reference
     - `ninNumber` (type: string) - NIN (National Identification Number).
     - `height` (type: number) - Height.
     - `weight` (type: number) - Weight.
-    - `externalRef` (type: number) - The customer's external reference or ID that uniquely identifies the customer on the vendor's platform.
+    - `externalRef` (type: string) - The customer's external reference or ID that uniquely identifies the customer on the vendor's platform.
   - `dependants` (type: customer[])
 
 **Example Usage:**
@@ -424,7 +423,7 @@ POST /api/v2/webhook/vendors
 
 ### 3.1 `Update notification webhook URL`
 
-- **Auth Type:** `Auth Type II`
+- **Auth:** `Auth Type II`
 - **HTTP Method:** `PATCH`
 - **Endpoint:** `/api/v2/vendors/config`
 - **Request Body**:
@@ -512,7 +511,7 @@ POST {{vendor's specified webhook URL}}
 
 ### 5.1 `Get providers list`
 
-- **Auth Type:** `Auth Type II`
+- **Auth:** `Auth Type II`
 - **HTTP Method:** `GET`
 - **Endpoint:** `/api/v2/vendors/providers-list`
 
@@ -547,4 +546,3 @@ GET /api/v2/vendors/providers-list
 }
 ```
 
-```

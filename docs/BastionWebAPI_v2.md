@@ -577,7 +577,7 @@ GET /api/v2/miscs/cities?state_id=15
   - `state_id` - The state id retrieved from the GET States/Regions API in section 5.1 above.
   - `city_id` - The city id retrieved from the GET Cities API above.
   - `provider_type` - Valid values specified below.
-  - `search_text` - Search text to filter by the provider name.
+  - `search_text` - Specify a Search text to filter providers by the provider name.
 
 - **Provider Types**
 ```

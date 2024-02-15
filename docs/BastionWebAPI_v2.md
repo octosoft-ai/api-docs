@@ -93,7 +93,7 @@ POST /api/v2/auth/change-password
 - **Auth:** `Auth Type 0 - No auth required`
 - **HTTP Method:** `GET`
 - **Endpoint:** `/api/v2/auth/password-reset?email={email}`
-- **Parameters:**
+- **Query Parameters:**
   - `email` (required) - Email of the vendor.
 
 **Example Usage:**
@@ -445,6 +445,7 @@ PATCH /api/v2/vendors/config
 }
 ```
 
+
 ---
 
 ## 4 Vendor Webhook Notification Events DataTypes
@@ -507,18 +508,102 @@ POST {{vendor's specified webhook URL}}
 
 ---
 
-## 5 Providers List
+## 5 Misc APIs
 
-### 5.1 `Get providers list`
+### 5.1 `Get Regions/States`
 
 - **Auth:** `Auth Type II`
 - **HTTP Method:** `GET`
-- **Endpoint:** `/api/v2/vendors/providers-list`
+- **Endpoint:** `/api/v2/miscs/states`
 
 **Example Usage:**
 
 ```http
-GET /api/v2/vendors/providers-list
+GET /api/v2/miscs/states
+```
+
+**Example Response:**
+
+```json
+{
+  "status": true,
+  "message": "States/Regions Retrieved Successfully!",
+  "data": [
+    {
+      "id": 15,
+      "name": "Abuja (FCT)",
+      "country_id": 162
+    },
+  ]
+}
+```
+
+### 5.2 `Get Cities`
+
+- **Auth:** `Auth Type II`
+- **HTTP Method:** `GET`
+- **Endpoint:** `/api/v2/miscs/cities?state_id={id}`
+- **Query Parameters:**
+  - `state_id` (required) - The state id retrieved from section 5.1 above.
+
+**Example Usage:**
+
+```http
+GET /api/v2/miscs/cities?state_id=15
+```
+
+**Example Response:**
+
+```json
+{
+  "status": true,
+  "message": "Cities Retrieved Successfully!",
+  "data": [
+    {
+      "id": 271,
+      "name": "Gwagwalada",
+      "state_id": 15,
+    },
+  ]
+}
+```
+
+### 5.3 `Get providers list`
+
+- **Auth:** `Auth Type II`
+- **HTTP Method:** `GET`
+- **Endpoint:** `/api/v2/miscs/providers-list?provider_type={type}&state_id={id}&city_id={cid}`
+- **Query Parameters:**
+  - `state_id` - The state id retrieved from the GET States/Regions API in section 5.1 above.
+  - `city_id` - The city id retrieved from the GET Cities API above.
+  - `provider_type` - Valid values specified below.
+  - `search_text` - Search text to filter by the provider name.
+
+- **Provider Types**
+```
+  1	= Hospital
+  2	= Pharmacy
+  3	= Optical / Ophthalmology
+  5	= Physiotherapist
+  6	= Dentist
+  7 = Polyclinic
+  8 = Doctor
+  9 = Ambulatory Center
+  10 = Diagnostic Centres
+  11 = Radiology
+  12 = Medical Supplies Company
+  13 = Gym/Fitness Centres
+  14 = Mental Wellbeing
+  15 = Child Care
+  16 = Maternal Health
+  17 = Emergency Service
+  18 = Public Health Facility
+```
+
+**Example Usage:**
+
+```http
+GET /api/v2/miscs/providers-list?provider_type=1&state_id=10&city_id=115&search_text=ABC Health
 ```
 
 **Example Response:**
@@ -545,4 +630,3 @@ GET /api/v2/vendors/providers-list
   ]
 }
 ```
-

@@ -344,7 +344,6 @@ GET /api/v2/vendors/policy-details/:reference
     - Grand Mother = "Grand Mother"
     - Cousin = "Cousin"
     - Friend = "Friend"
-    - Other = "Other"
 
 
 - **Auth:** `Auth Type II`

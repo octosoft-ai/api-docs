@@ -415,6 +415,67 @@ POST /api/v2/webhook/vendors
   }
 ```
 
+---
+
+### 2.7 `Create Endorsement`
+
+- **Enums**
+  -Section 2.6
+
+- **Auth:** `Auth Type II`
+- **HTTP Method:** `POST`
+- **Endpoint:** `/api/v2/endorsement/add`
+- **Request Body**:
+  - `plan_id` (required).
+  - `policyId` (required)
+  - `customer` (type: object)
+    - `firstName` (type: string, required) - First name.
+    - `middleName` (type: string) - Middle name.
+    - `lastName` (type: string, required) - Last name.
+    - `maidenName` (type: string) - Maiden name.
+    - `dob` (type: date, required) - Date of birth.
+    - `gender` (type: string, required) - Gender. Allowed values: 'Male', 'Female'.
+    - `phone` (type: string, required) - Phone number. Must be a valid phone number.
+    - `relation` (type: string, required) - Relationship status. Allowed values: [List of allowed relations].
+    - `maritalStatus` (type: number, required) - Marital status. Allowed values: [List of allowed marital statuses].
+    - `country` (type: number, required) - Country code.
+    - `state` (type: number, required) - State code.
+    - `city` (type: number, required) - City code.
+    - `address` (type: string, required) - Residential address.
+    - `genotype` (type: number) - Genotype. Allowed values: [List of allowed genotypes].
+    - `bloodGroup` (type: number) - Blood group. Allowed values: [List of allowed blood groups].
+    - `religion` (type: number) - Religion. Allowed values: [List of allowed religions].
+    - `employeeId` (type: string) - Employee ID.
+    - `nationalId` (type: string) - National ID.
+    - `ninNumber` (type: string) - NIN (National Identification Number).
+    - `height` (type: number) - Height.
+    - `weight` (type: number) - Weight.
+
+**Example Usage:**
+
+```http
+POST /api/v2/endorsement/add
+```
+
+**Example Response:**
+
+```json
+ {
+    "status": true,
+    "data": {
+        "success": 1,
+        "message": "Endorsement created successfully.",
+        "membersDetails": {
+            "planId": "85",
+            "memberId": "100004976",
+            "policyId": "2058",
+            "firstName": "John",
+            "lastName": "Doe",
+            ...(all other customer data provided during onboarding)
+        }
+    }
+}
+```
 
 ---
 

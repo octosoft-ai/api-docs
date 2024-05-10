@@ -460,7 +460,7 @@ POST /api/v2/endorsement/add
 **Example Response:**
 
 ```json
- {
+  {
     "status": true,
     "data": {
         "success": 1,
@@ -474,7 +474,38 @@ POST /api/v2/endorsement/add
             ...(all other customer data provided during onboarding)
         }
     }
-}
+  }
+```
+
+---
+
+### 2.8 `Delete Endorsement`
+
+- **Auth:** `Auth Type II`
+- **HTTP Method:** `POST`
+- **Endpoint:** `/api/v2/endorsement/remove`
+- **Request Body**:
+  - `memberId` (required).
+  - `policyId` (required)
+
+**Example Usage:**
+
+```http
+POST /api/v2/endorsement/remove
+```
+
+**Example Response:**
+
+```json
+ {
+    "status": true,
+    "data": {
+        "success": 1,
+        "message": "Endorsement deleted successfully.",
+        "memberId": "100004976",
+        "policyId": "2058"
+    }
+  }
 ```
 
 ---

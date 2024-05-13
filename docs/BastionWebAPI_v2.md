@@ -426,10 +426,10 @@ POST /api/v2/webhook/vendors
 - **HTTP Method:** `POST`
 - **Endpoint:** `/api/v2/endorsement/add`
 - **Request Body**:
-  - `reference` (required)
+  - `reference` (required).
   - `plan_id` (required).
-  - `policyId` (required)
-  - `customer` (type: object)
+  - `policyId` (required).
+  - `customer` (type: object).
     - `firstName` (type: string, required) - First name.
     - `middleName` (type: string) - Middle name.
     - `lastName` (type: string, required) - Last name.
@@ -451,6 +451,12 @@ POST /api/v2/webhook/vendors
     - `ninNumber` (type: string) - NIN (National Identification Number).
     - `height` (type: number) - Height.
     - `weight` (type: number) - Weight.
+    - `preExistingCondition` (type: number) - Indicates if the customer has pre-existing conditions. Allowed values: 1 (true) or 0 (false).
+    - `condition` (type: Array) - Array of pre-existing condition IDs. Include pre-existing condition IDs here if `preExistingCondition` is true.
+
+  #### Notes:
+  - If `preExistingCondition` is set to 1 (true), include an array of pre-existing condition IDs in the `condition` field to specify the customer's pre-existing conditions.
+  - If `preExistingCondition` is set to 0 (false), the `condition` field can be omitted.
 
 **Example Usage:**
 
@@ -720,5 +726,37 @@ GET /api/v2/miscs/providers-list?provider_type=1&state_id=10&city_id=115&search_
       "rating": "5"
     },
   ]
+}
+```
+
+
+### 5.4 `Get pre-existing condition list`
+
+- **Auth:** `Auth Type II`
+- **HTTP Method:** `GET`
+- **Endpoint:** `/api/v2/conditions?query={name}`
+- **Query Parameters:**
+  - `query` - Specify a Search text to filter conditions by the condition name..
+
+**Example Usage:**
+
+```http
+GET /api/v2/conditions?query=abdominal
+```
+
+**Example Response:**
+
+```json
+{
+    "statusCode": 200,
+    "message": "Successful!",
+    "data": [
+        {
+            "id": "651",
+            "pec_name": "Abdominal pregnancy",
+            "pec_chapter_id": "14",
+            "pec_status": "1"
+        }
+    ]
 }
 ```

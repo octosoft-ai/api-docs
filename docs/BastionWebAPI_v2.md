@@ -426,6 +426,7 @@ POST /api/v2/webhook/vendors
 - **HTTP Method:** `POST`
 - **Endpoint:** `/api/v2/endorsement/add`
 - **Request Body**:
+  - `reference` (required)
   - `plan_id` (required).
   - `policyId` (required)
   - `customer` (type: object)

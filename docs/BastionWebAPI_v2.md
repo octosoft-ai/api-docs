@@ -485,7 +485,6 @@ POST /api/v2/endorsement/add
 ```
 ---
 
-
 ### 3.2 `Get pre-existing condition list`
 
 - **Auth:** `Auth Type II`

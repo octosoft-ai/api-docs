@@ -416,8 +416,8 @@ POST /api/v2/webhook/vendors
 ```
 
 ---
-
-### 2.7 `Create Endorsement`
+## 3 Endorsements
+### 3.1 `Create Endorsement`
 
 - **Enums**
   -Section 2.6
@@ -483,10 +483,42 @@ POST /api/v2/endorsement/add
     }
   }
 ```
+---
+
+### 3.2 `Get pre-existing condition list`
+
+- **Auth:** `Auth Type II`
+- **HTTP Method:** `GET`
+- **Endpoint:** `/api/v2/conditions?query={name}`
+- **Query Parameters:**
+  - `query` - Specify a Search text to filter conditions by the condition name..
+
+**Example Usage:**
+
+```http
+GET /api/v2/conditions?query=abdominal
+```
+
+**Example Response:**
+
+```json
+{
+    "statusCode": 200,
+    "message": "Successful!",
+    "data": [
+        {
+            "id": "651",
+            "pec_name": "Abdominal pregnancy",
+            "pec_chapter_id": "14",
+            "pec_status": "1"
+        }
+    ]
+}
+```
 
 ---
 
-### 2.8 `Delete Endorsement`
+### 3.3 `Delete Endorsement`
 
 - **Auth:** `Auth Type II`
 - **HTTP Method:** `POST`
@@ -517,9 +549,9 @@ POST /api/v2/endorsement/remove
 
 ---
 
-## 3 Vendor API Config
+## 4 Vendor API Config
 
-### 3.1 `Update notification webhook URL`
+### 4.1 `Update notification webhook URL`
 
 - **Auth:** `Auth Type II`
 - **HTTP Method:** `PATCH`
@@ -546,9 +578,9 @@ PATCH /api/v2/vendors/config
 
 ---
 
-## 4 Vendor Webhook Notification Events DataTypes
+## 5 Vendor Webhook Notification Events DataTypes
 
-### 4.1 `Issued Policy event datatype`
+### 5.1 `Issued Policy event datatype`
 
 - **HTTP Method:** `POST`
 - **Endpoint:** `{{vendor's specified webhook URL}}`
@@ -576,7 +608,7 @@ POST {{vendor's specified webhook URL}}
 }
 ```
 
-### 4.2 `Member Onboard event datatype`
+### 5.2 `Member Onboard event datatype`
 
 - **HTTP Method:** `POST`
 - **Endpoint:** `{{vendor's specified webhook URL}}`
@@ -606,9 +638,9 @@ POST {{vendor's specified webhook URL}}
 
 ---
 
-## 5 Misc APIs
+## 6 Misc APIs
 
-### 5.1 `Get Regions/States`
+### 6.1 `Get Regions/States`
 
 - **Auth:** `Auth Type II`
 - **HTTP Method:** `GET`
@@ -636,7 +668,7 @@ GET /api/v2/miscs/states
 }
 ```
 
-### 5.2 `Get Cities`
+### 6.2 `Get Cities`
 
 - **Auth:** `Auth Type II`
 - **HTTP Method:** `GET`
@@ -666,7 +698,7 @@ GET /api/v2/miscs/cities?state_id=15
 }
 ```
 
-### 5.3 `Get providers list`
+### 6.3 `Get providers list`
 
 - **Auth:** `Auth Type II`
 - **HTTP Method:** `GET`
@@ -726,37 +758,5 @@ GET /api/v2/miscs/providers-list?provider_type=1&state_id=10&city_id=115&search_
       "rating": "5"
     },
   ]
-}
-```
-
-
-### 5.4 `Get pre-existing condition list`
-
-- **Auth:** `Auth Type II`
-- **HTTP Method:** `GET`
-- **Endpoint:** `/api/v2/conditions?query={name}`
-- **Query Parameters:**
-  - `query` - Specify a Search text to filter conditions by the condition name..
-
-**Example Usage:**
-
-```http
-GET /api/v2/conditions?query=abdominal
-```
-
-**Example Response:**
-
-```json
-{
-    "statusCode": 200,
-    "message": "Successful!",
-    "data": [
-        {
-            "id": "651",
-            "pec_name": "Abdominal pregnancy",
-            "pec_chapter_id": "14",
-            "pec_status": "1"
-        }
-    ]
 }
 ```

@@ -552,7 +552,7 @@ POST /api/v2/endorsement/remove
 ### 3.4 `Get Enrollee Status`
 
 - **Auth:** `Auth Type II`
-- **HTTP Method:** `POST`
+- **HTTP Method:** `GET`
 - **Endpoint:** `/api/v2/enrollee-status`
 - **Query Parameters:**:
   - `memberId` (required).
@@ -560,7 +560,7 @@ POST /api/v2/endorsement/remove
 **Example Usage:**
 
 ```http
-POST /api/v2/enrollee-status?memberId=100004976
+GET /api/v2/enrollee-status?memberId=100004976
 ```
 
 **Example Response:**
@@ -584,7 +584,7 @@ POST /api/v2/enrollee-status?memberId=100004976
 ### 3.5 `Get Enrollee Plan`
 
 - **Auth:** `Auth Type II`
-- **HTTP Method:** `POST`
+- **HTTP Method:** `GET`
 - **Endpoint:** `/api/v2/enrollee-plan`
 - **Query Parameters:**:
   - `memberId` (required).
@@ -592,7 +592,7 @@ POST /api/v2/enrollee-status?memberId=100004976
 **Example Usage:**
 
 ```http
-POST /api/v2/enrollee-plan?memberId=100004976
+GET /api/v2/enrollee-plan?memberId=100004976
 ```
 
 **Example Response:**

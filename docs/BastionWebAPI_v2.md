@@ -737,6 +737,61 @@ POST {{vendor's specified webhook URL}}
 }
 ```
 
+### 5.3 `Create Endorsement event datatype`
+
+- **HTTP Method:** `POST`
+- **Endpoint:** `{{vendor's specified webhook URL}}`
+
+**Example Event:**
+
+```http
+POST {{vendor's specified webhook URL}}
+```
+
+**Example Event Payload:**
+
+```json
+{
+  "event": "added-policy-member",
+  "accessKey": "{{Vendor's specified access key}}",
+  "data": {
+    "planId": "85",
+    "memberId": "100004976",
+    "policyId": "2058",
+    "firstName": "John",
+    "lastName": "Doe",
+    ...(all other customer data provided during onboarding)
+  }
+}
+```
+
+### 5.3 `Undo Deleted Member Endorsement event datatype`
+
+- **HTTP Method:** `POST`
+- **Endpoint:** `{{vendor's specified webhook URL}}`
+
+**Example Event:**
+
+```http
+POST {{vendor's specified webhook URL}}
+```
+
+**Example Event Payload:**
+
+```json
+{
+  "event": "re-endorsed-member",
+  "accessKey": "{{Vendor's specified access key}}",
+  "data": {
+    "planId": "85",
+    "memberId": "100004976",
+    "policyId": "2058",
+    "firstName": "John",
+    "lastName": "Doe",
+    ...(all other customer data provided during onboarding)
+  }
+}
+```
 
 ---
 

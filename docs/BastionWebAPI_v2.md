@@ -491,7 +491,7 @@ POST /api/v2/endorsement/add
 - **HTTP Method:** `GET`
 - **Endpoint:** `/api/v2/conditions?query={name}`
 - **Query Parameters:**
-  - `query` - Specify a Search text to filter conditions by the condition name..
+  - `query` - Specify a Search text to filter conditions by the condition name
 
 **Example Usage:**
 
@@ -525,7 +525,7 @@ GET /api/v2/conditions?query=abdominal
 - **Endpoint:** `/api/v2/endorsement/remove`
 - **Request Body**:
   - `memberId` (required).
-  - `policyId` (required)
+  - `policyId` (required).
 
 **Example Usage:**
 
@@ -543,6 +543,108 @@ POST /api/v2/endorsement/remove
         "message": "Endorsement deleted successfully.",
         "memberId": "100004976",
         "policyId": "2058"
+    }
+  }
+```
+
+---
+
+### 3.4 `Get Enrollee Status`
+
+- **Auth:** `Auth Type II`
+- **HTTP Method:** `POST`
+- **Endpoint:** `/api/v2/enrollee-status`
+- **Query Parameters:**:
+  - `memberId` (required).
+
+**Example Usage:**
+
+```http
+POST /api/v2/enrollee-status?memberId=100004976
+```
+
+**Example Response:**
+
+```json
+ {
+  "statusCode": 200,
+  "message": "Successful!",
+  "data": {
+      "memberId": "100004976",
+      "firstName": "John",
+      "lastName": "Doe",
+      ...(other customer data)
+      "status": "Active"
+    }
+  }
+```
+
+---
+
+### 3.5 `Get Enrollee Plan`
+
+- **Auth:** `Auth Type II`
+- **HTTP Method:** `POST`
+- **Endpoint:** `/api/v2/enrollee-plan`
+- **Query Parameters:**:
+  - `memberId` (required).
+
+**Example Usage:**
+
+```http
+POST /api/v2/enrollee-plan?memberId=100004976
+```
+
+**Example Response:**
+
+```json
+ {
+  "statusCode": 200,
+  "message": "Successful!",
+  "data": {
+      "memberId": "100004976",
+      "firstName": "John",
+      "lastName": "Doe",
+      ...(other customer data)
+      "planId": "85",
+      "planName": "Plan"
+    }
+  }
+```
+
+---
+
+### 3.5 `Undo Deleted Member Endorsement`
+
+- **Auth:** `Auth Type II`
+- **HTTP Method:** `POST`
+- **Endpoint:** `/api/v2/endorsement/undo-delete`
+- **Request Body:**:
+  - `memberId` (required).
+
+**Example Usage:**
+
+```http
+POST /api/v2/endorsement/undo-delete
+```
+
+**Example Response:**
+
+```json
+ {
+    "statusCode": 200,
+    "message": "Successful!",
+    "data": {
+      "success": 1,
+      "message": "Re-endorsed Member Successfully.",
+      "membersDetails": {
+          "planId": "85",
+          "memberId": "100004976",
+          "policyId": "2058",
+          "firstName": "John",
+          "lastName": "Doe",
+            ...(all other customer data provided during onboarding)
+      }
     }
   }
 ```

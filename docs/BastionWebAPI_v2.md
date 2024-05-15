@@ -567,16 +567,19 @@ GET /api/v2/enrollee-status?memberId=100004976
 
 ```json
  {
-  "statusCode": 200,
-  "message": "Successful!",
-  "data": {
-      "memberId": "100004976",
-      "firstName": "John",
-      "lastName": "Doe",
-      ...(other customer data)
-      "status": "Active"
+    "status": true,
+    "data": {
+      "success": 1,
+      "message": "Member Status Details",
+      "member": {
+        "memberId": "100004976",
+        "firstName": "John",
+        "lastName": "Doe",
+        ...(other customer data)
+        "status": "Active"
+      }
     }
-  }
+ }
 ```
 
 ---
@@ -599,15 +602,18 @@ GET /api/v2/enrollee-plan?memberId=100004976
 
 ```json
  {
-  "statusCode": 200,
-  "message": "Successful!",
-  "data": {
-      "memberId": "100004976",
-      "firstName": "John",
-      "lastName": "Doe",
-      ...(other customer data)
-      "planId": "85",
-      "planName": "Plan"
+    "status": true,
+    "data": {
+      "success": 1,
+      "message": "Member Plan Details",
+      "member": {
+        "memberId": "100004976",
+        "firstName": "John",
+        "lastName": "Doe",
+        ...(other customer data)
+        "planId": "85",
+        "planName": "Plan"
+      }
     }
   }
 ```
@@ -632,18 +638,55 @@ POST /api/v2/endorsement/undo-delete
 
 ```json
  {
-    "statusCode": 200,
-    "message": "Successful!",
+    "status": true,
     "data": {
       "success": 1,
       "message": "Re-endorsed Member Successfully.",
       "membersDetails": {
-          "planId": "85",
+        "planId": "85",
+        "memberId": "100004976",
+        "policyId": "2058",
+        "firstName": "John",
+        "lastName": "Doe",
+        ...(all other customer data provided during onboarding)
+      }
+    }
+  }
+```
+
+---
+
+### 3.6 `Upgrade/Downgrade Member Plan`
+
+- **Auth:** `Auth Type II`
+- **HTTP Method:** `POST`
+- **Endpoint:** `/api/v2/endorsement/update-member-plan`
+- **Request Body:**:
+  - `memberId` (required).
+  - `oldPlanId` (required).
+  - `newPlanId` (required).
+
+**Example Usage:**
+
+```http
+POST /api/v2/endorsement/update-member-plan
+```
+
+**Example Response:**
+
+```json
+ {
+    "status": true,
+    "data": {
+        "success": 1,
+        "message": "Re-endorsed Member Successfully.",
+        "membersDetails": {
           "memberId": "100004976",
           "policyId": "2058",
+          "planId": "85",
           "firstName": "John",
           "lastName": "Doe",
-            ...(all other customer data provided during onboarding)
+          ...(all other customer data provided during onboarding)
       }
     }
   }
@@ -859,12 +902,13 @@ GET /api/v2/miscs/cities?state_id=15
 
 - **Auth:** `Auth Type II`
 - **HTTP Method:** `GET`
-- **Endpoint:** `/api/v2/miscs/providers-list?provider_type={type}&state_id={id}&city_id={cid}`
+- **Endpoint:** `/api/v2/miscs/providers-list?provider_type={type}&state_id={id}&city_id={cid}&plan_id={plan_id}`
 - **Query Parameters:**
   - `state_id` - The state id retrieved from the GET States/Regions API in section 5.1 above.
   - `city_id` - The city id retrieved from the GET Cities API above.
   - `provider_type` - Valid values specified below.
   - `search_text` - Specify a Search text to filter providers by the provider name.
+  - `plan_id` - Vendors plan_id.
 
 - **Provider Types**
 ```
@@ -890,7 +934,7 @@ GET /api/v2/miscs/cities?state_id=15
 **Example Usage:**
 
 ```http
-GET /api/v2/miscs/providers-list?provider_type=1&state_id=10&city_id=115&search_text=ABC Health
+GET /api/v2/miscs/providers-list?provider_type=1&state_id=10&city_id=115&search_text=ABC Health&plan_id=85
 ```
 
 **Example Response:**

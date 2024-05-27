@@ -113,7 +113,7 @@ GET /api/v2/auth/password-reset?email=johndoe@getnada.com
 
 ---
 
-## 2 Broker
+## 2 Broker Policy
 
 ### 2.1 `Get broker plans`
 
@@ -416,7 +416,7 @@ POST /api/v2/webhook/vendors
 ```
 
 ---
-## 3 Endorsements
+## 3 Broker Endorsements
 ### 3.1 `Create Endorsement`
 
 - **Enums**
@@ -616,6 +616,44 @@ GET /api/v2/enrollee-plan?memberId=100004976
       }
     }
   }
+```
+
+---
+
+### 3.5 `Get Enrollee Utilization`
+
+- **Auth:** `Auth Type II`
+- **HTTP Method:** `GET`
+- **Endpoint:** `/api/v2/enrollee-utilization`
+- **Query Parameters:**:
+  - `memberId` (required).
+
+**Example Usage:**
+
+```http
+GET /api/v2/enrollee-utilization?memberId=100004976
+```
+
+**Example Response:**
+
+```json
+ {
+    "status": true,
+    "data": {
+        "success": 1,
+        "message": "Fetched Member Utilization Successfully.",
+        "membersDetails": {
+            "memberId": "100004976",
+            "firstName": "John",
+            "lastName": "Doe",
+            ...(other customer data)
+            "planName": "VELVET",
+            "provider": "TEST HOSPITAL",
+            "totalSpent": 999,
+            "balance": 9999999
+        }
+    }
+}
 ```
 
 ---

@@ -647,8 +647,8 @@ GET /api/v2/enrollee-utilization?memberId=100004976
             "firstName": "John",
             "lastName": "Doe",
             ...(other customer data)
-            "planName": "VELVET",
-            "provider": "TEST HOSPITAL",
+            "planName": "Plan",
+            "provider": "HOSPITAL",
             "totalSpent": 999,
             "balance": 9999999
         }

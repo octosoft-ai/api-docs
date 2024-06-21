@@ -620,7 +620,7 @@ GET /api/v2/enrollee-plan?memberId=100004976
 
 ---
 
-### 3.5 `Get Enrollee Utilization`
+### 3.6 `Get Enrollee Utilization`
 
 - **Auth:** `Auth Type II`
 - **HTTP Method:** `GET`
@@ -658,7 +658,7 @@ GET /api/v2/enrollee-utilization?memberId=100004976
 
 ---
 
-### 3.5 `Undo Deleted Member Endorsement`
+### 3.7 `Undo Deleted Member Endorsement`
 
 - **Auth:** `Auth Type II`
 - **HTTP Method:** `POST`
@@ -694,7 +694,7 @@ POST /api/v2/endorsement/undo-delete
 
 ---
 
-### 3.6 `Upgrade/Downgrade Member Plan`
+### 3.8 `Upgrade/Downgrade Member Plan`
 
 - **Auth:** `Auth Type II`
 - **HTTP Method:** `POST`

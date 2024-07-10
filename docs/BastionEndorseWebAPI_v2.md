@@ -246,6 +246,7 @@ GET /api/v2/vendors/plans/:id
     - `middleName` (type: string) - Middle name.
     - `lastName` (type: string, required) - Last name.
     - `maidenName` (type: string) - Maiden name.
+    - `_email` (type: string) - Email.
     - `dob` (type: date, required) - Date of birth.
     - `gender` (type: string, required) - Gender. Allowed values: 'Male', 'Female'.
     - `phone` (type: string, required) - Phone number. Must be a valid phone number.

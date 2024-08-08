@@ -590,8 +590,7 @@ POST /api/v2/endorsement/update-member-plan
             "email": "",
             "age": "22",
             "dob": "10-01-1962",
-            "relation": "Self",
-            "address": "addresss"
+            "relation": "Self"
         }
     }
 }

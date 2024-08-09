@@ -545,6 +545,59 @@ POST /api/v2/endorsement/update-member-plan
 
 ---
 
+---
+
+### 3.9 `Update Enrollee Details`
+
+- **Auth:** `Auth Type II`
+- **HTTP Method:** `POST`
+- **Endpoint:** `GET /api/v2/endorsement/update-enrollee-details`
+- **Request Body:**:
+  - `memberId` (required).
+  - `policyId` (required).
+  - `customer` (type: object).
+    - `firstName` (type: string, required) - First name.
+    - `middleName` (type: string) - Middle name.
+    - `lastName` (type: string, required) - Last name.
+    - `maidenName` (type: string) - Maiden name.
+    - `_email` (type: string) - Email.
+    - `dob` (type: date, required) - Date of birth.
+    - `gender` (type: string, required) - Gender. Allowed values: 'Male', 'Female'.
+    - `phone` (type: string, required) - Phone number. Must be a valid phone number.
+    - `address` (type: string, required) - Residential address.
+
+**Example Usage:**
+
+```http
+POST /api/v2/endorsement/update-member-plan
+```
+
+**Example Response:**
+
+```json
+ {
+    "status": true,
+    "data": {
+        "success": 1,
+        "message": "Member Information Updated Successfully.",
+        "membersDetails": {
+            "memberId": "100004976",
+            "policyId": "2058",
+            "firstName": "Jonny",
+            "middleName": "",
+            "maidenName": "",
+            "lastName": "Doe",
+            "email": "",
+            "age": "22",
+            "dob": "10-01-1962",
+            "relation": "Self"
+        }
+    }
+}
+```
+
+---
+
 ## 4 Vendor API Config
 
 ### 4.1 `Update notification webhook URL`

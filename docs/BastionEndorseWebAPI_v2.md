@@ -598,6 +598,38 @@ POST /api/v2/endorsement/update-member-plan
 
 ---
 
+### 3.10 `Get Enrollee Auth Status`
+
+- **Auth:** `Auth Type II`
+- **HTTP Method:** `GET`
+- **Endpoint:** `/api/v2/enrollee-auth-status`
+- **Query Parameters:**:
+  - `memberId` (required).
+
+**Example Usage:**
+
+```http
+GET /api/v2/enrollee-auth-status?memberId=100004976
+```
+
+**Example Response:**
+
+```json
+{
+  "status": true,
+  "data": {
+    "success": 1,
+    "message": "Member Auth Status Details.",
+    "member_auth": {
+      "auth_number": "3000XXXXX",
+      "message": "Dear Johm  Doe, an auth request 3000XXXXX from null, 1999-01-01 has been submitted for approval."
+    }
+  }
+}
+```
+
+---
+
 ## 4 Vendor API Config
 
 ### 4.1 `Update notification webhook URL`

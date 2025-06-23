@@ -630,6 +630,85 @@ GET /api/v2/enrollee-auth-status?memberId=100004976
 
 ---
 
+### 3.7 `Undo Multiple Deleted Member Endorsement`
+
+- **Auth:** `Auth Type II`
+- **HTTP Method:** `POST`
+- **Endpoint:** `/api/v2/endorsement/undo-delete`
+- **Request Body:**:
+  - `memberIds` (required).
+
+**Example Usage:**
+
+```http
+POST /api/v2/endorsement/multi-undo-delete
+```
+
+**Example Request:**
+```json
+{
+  "memberIds": [
+      "10000XXXX",
+      "10000XXXX",
+      "10000XXXX"
+  ]
+}
+```
+
+**Example Response:**
+
+```json
+  {
+    "status": true,
+    "data": {
+      "success": 1,
+      "message": "Processed members successfully.",
+      "membersDetails": {
+        "processed_members": [
+          {
+              "memberId": "10000XXXX",
+              "planId": "85",
+              "planName": "Jade",
+              "policyId": "2058",
+              "firstName": "John",
+              "middleName": "",
+              "lastName": "Doe",
+              ...(all other customer data provided during onboarding)
+          },
+          {
+              "memberId": "10000XXXX",
+              "planId": "85",
+              "planName": "Jade",
+              "policyId": "2058",
+              "firstName": "John",
+              "middleName": "",
+              "lastName": "Doe",
+              ...(all other customer data provided during onboarding)
+          },
+          {
+              "memberId": "10000XXXX",
+              "planId": "85",
+              "planName": "Jade",
+              "policyId": "2058",
+              "firstName": "John",
+              "middleName": "",
+              "lastName": "Doe",
+              ...(all other customer data provided during onboarding)
+          }
+        ]
+      },
+      "failed_members": [
+          {
+              "memberId": "10000XXX",
+              "error": "Member not found or already active."
+          }
+      ]
+    }
+  }
+```
+
+---
+
 ## 4 Vendor API Config
 
 ### 4.1 `Update notification webhook URL`

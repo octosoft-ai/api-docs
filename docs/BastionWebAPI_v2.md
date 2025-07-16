@@ -417,6 +417,193 @@ POST /api/v2/webhook/vendors
 
 ---
 
+## 3 Enrollee
+
+---
+
+### 3.1 `Get Enrollee Plan`
+
+- **Auth:** `Auth Type II`
+- **HTTP Method:** `GET`
+- **Endpoint:** `/api/v2/enrollee-plan`
+- **Query Parameters:**:
+  - `memberId` (required).
+
+**Example Usage:**
+
+```http
+GET /api/v2/enrollee-plan?memberId=100004976
+```
+
+**Example Response:**
+
+```json
+ {
+    "status": true,
+    "data": {
+      "success": 1,
+      "message": "Member Plan Details",
+      "member": {
+        "memberId": "100004976",
+        "firstName": "John",
+        "lastName": "Doe",
+        ...(other customer data)
+        "planId": "85",
+        "planName": "Plan"
+      }
+    }
+  }
+```
+
+---
+
+### 3.2 `Get Enrollee Utilization`
+
+- **Auth:** `Auth Type II`
+- **HTTP Method:** `GET`
+- **Endpoint:** `/api/v2/enrollee-utilization`
+- **Query Parameters:**:
+  - `memberId` (required).
+
+**Example Usage:**
+
+```http
+GET /api/v2/enrollee-utilization?memberId=100004976
+```
+
+**Example Response:**
+
+```json
+ {
+    "status": true,
+    "data": {
+        "success": 1,
+        "message": "Fetched Member Utilization Successfully.",
+        "membersDetails": {
+            "memberId": "100004976",
+            "firstName": "John",
+            "lastName": "Doe",
+            ...(other customer data)
+            "planName": "Plan",
+            "provider": "HOSPITAL",
+            "totalSpent": 999,
+            "balance": 9999999
+        }
+    }
+}
+```
+
+---
+
+### 3.3 `Get Enrollee Status`
+
+- **Auth:** `Auth Type II`
+- **HTTP Method:** `GET`
+- **Endpoint:** `/api/v2/enrollee-status`
+- **Query Parameters:**:
+  - `memberId` (required).
+
+**Example Usage:**
+
+```http
+GET /api/v2/enrollee-status?memberId=100004976
+```
+
+**Example Response:**
+
+```json
+ {
+    "status": true,
+    "data": {
+      "success": 1,
+      "message": "Member Status Details",
+      "member": {
+        "memberId": "100004976",
+        "firstName": "John",
+        "lastName": "Doe",
+        ...(other customer data)
+        "status": "Active"
+      }
+    }
+ }
+```
+
+---
+
+### 3.4 `Get Enrollee Plan`
+
+- **Auth:** `Auth Type II`
+- **HTTP Method:** `GET`
+- **Endpoint:** `/api/v2/enrollee-plan`
+- **Query Parameters:**:
+  - `memberId` (required).
+
+**Example Usage:**
+
+```http
+GET /api/v2/enrollee-plan?memberId=100004976
+```
+
+**Example Response:**
+
+```json
+ {
+    "status": true,
+    "data": {
+      "success": 1,
+      "message": "Member Plan Details",
+      "member": {
+        "memberId": "100004976",
+        "firstName": "John",
+        "lastName": "Doe",
+        ...(other customer data)
+        "planId": "85",
+        "planName": "Plan"
+      }
+    }
+  }
+```
+
+---
+
+### 3.5 `Get Enrollee Utilization`
+
+- **Auth:** `Auth Type II`
+- **HTTP Method:** `GET`
+- **Endpoint:** `/api/v2/enrollee-utilization`
+- **Query Parameters:**:
+  - `memberId` (required).
+
+**Example Usage:**
+
+```http
+GET /api/v2/enrollee-utilization?memberId=100004976
+```
+
+**Example Response:**
+
+```json
+ {
+    "status": true,
+    "data": {
+        "success": 1,
+        "message": "Fetched Member Utilization Successfully.",
+        "membersDetails": {
+            "memberId": "100004976",
+            "firstName": "John",
+            "lastName": "Doe",
+            ...(other customer data)
+            "planName": "Plan",
+            "provider": "HOSPITAL",
+            "totalSpent": 999,
+            "balance": 9999999
+        }
+    }
+}
+```
+
+---
+
 ## 4 Vendor API Config
 
 ### 4.1 `Update notification webhook URL`

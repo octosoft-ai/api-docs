@@ -630,7 +630,7 @@ GET /api/v2/enrollee-auth-status?memberId=100004976
 
 ---
 
-### 3.7 `Undo Multiple Deleted Member Endorsement`
+### 3.11 `Undo Multiple Deleted Member Endorsement`
 
 - **Auth:** `Auth Type II`
 - **HTTP Method:** `POST`

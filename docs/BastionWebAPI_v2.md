@@ -185,7 +185,7 @@ GET /api/v2/vendors/plans/:id
 
 - **Auth:** `Auth Type II`
 - **HTTP Method:** `GET`
-- **Endpoint:** `/api/v2/vendors/member-details/:reference`
+- **Endpoint:** `/api/v2/vendors/member-details?reference=:reference`
 - **Parameters:**
   - `reference` (required) - Member reference.
 

@@ -192,7 +192,7 @@ GET /api/v2/vendors/plans/:id
 **Example Usage:**
 
 ```http
-GET /api/v2/vendors/member-details/:reference
+GET /api/v2/vendors/member-details?reference=:reference
 ```
 
 **Example Response:**

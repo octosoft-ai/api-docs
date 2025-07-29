@@ -1,3 +1,11 @@
+## Bastion Policy Web API Documentation
+
+> **This is the official documentation for the Bastion Policy Web API.**
+>
+> **Important:** This API is **deprecated** and shouldn't be utilized
+
+---
+
 ## Docs
 
 **Base URLs:** 

@@ -1,3 +1,11 @@
+## Bastion Policy Web API Documentation
+
+> **This is the official documentation for the Bastion Policy Web API.**
+>
+> **Important:** This API is strictly scoped to **policy-related operations only** and must not call or interact with **Endorsement Web API** endpoints.
+
+---
+
 ## Docs
 
 **Base URLs:** 

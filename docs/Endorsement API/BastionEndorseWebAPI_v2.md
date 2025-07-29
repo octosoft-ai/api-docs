@@ -1,3 +1,9 @@
+## Endorsement Web API Documentation
+
+> **This is the official documentation for the Endorsement Web API.**
+>
+> **Important:** This API is strictly scoped to **endorsement-related operations only** and must not interact with endpoints outside the Endorsement API boundary (e.g., core Policy APIs).
+
 ## Docs
 
 **Base URLs:** 

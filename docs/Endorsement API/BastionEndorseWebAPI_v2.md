@@ -271,11 +271,11 @@ GET /api/v2/vendors/plans/:id
     - `height` (type: number) - Height.
     - `weight` (type: number) - Weight.
     - `preExistingCondition` (type: number) - Indicates if the customer has pre-existing conditions. Allowed values: 1 (true) or 0 (false).
-    - `condition` (type: Array) - Array of pre-existing condition IDs. Include pre-existing condition IDs here if `preExistingCondition` is true.
+    - `conditions` (type: Array) - Array of pre-existing condition IDs. Include pre-existing condition IDs here if `preExistingCondition` is true.
 
   #### Notes:
-  - If `preExistingCondition` is set to 1 (true), include an array of pre-existing condition IDs in the `condition` field to specify the customer's pre-existing conditions.
-  - If `preExistingCondition` is set to 0 (false), the `condition` field can be omitted.
+  - If `preExistingCondition` is set to 1 (true), include an array of pre-existing condition IDs in the `conditions` field to specify the customer's pre-existing conditions.
+  - If `preExistingCondition` is set to 0 (false), the `conditions` field can be omitted.
 
 **Example Usage:**
 

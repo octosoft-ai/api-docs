@@ -636,7 +636,7 @@ GET /api/v2/enrollee-auth-status?memberId=100004976
 
 ---
 
-### 3.7 `Undo Multiple Deleted Member Endorsement`
+### 3.11 `Undo Multiple Deleted Member Endorsement`
 
 - **Auth:** `Auth Type II`
 - **HTTP Method:** `POST`
@@ -711,6 +711,54 @@ POST /api/v2/endorsement/multi-undo-delete
       ]
     }
   }
+```
+---
+
+### 3.12 `Get Enrollee Visits`
+
+- **Auth:** `Auth Type II`
+- **HTTP Method:** `GET`
+- **Endpoint:** `/api/v2/enrollee-visits`
+- **Query Parameters:**:
+  - `memberId` (required).
+
+**Example Usage:**
+
+```http
+GET /api/v2/enrollee-visits?memberId=100004976
+```
+
+**Example Response:**
+
+```json
+{
+  "status": true,
+  "data": {
+    "success": 1,
+    "message": "Member Appointments Found.",
+    "membersDetails": {
+      "memberId": "100004976",
+      "firstName": "John",
+      "middleName": "",
+      "maidenName": "",
+      "lastName": "Doe",
+      "age": "",
+      ...(all other customer data provided during onboarding)
+      "appointments": [
+        {
+          "appointment_date": "2023-02-20 00:00:00",
+          "d_department": "DERMATOLOGY",
+          "provider_name": "ABC PHARMACY"
+        },
+        {
+          "appointment_date": "2024-12-10 00:00:00",
+          "d_department": "OPTOLOGY",
+          "provider_name": "ABC CLINIC"
+        }
+      ]
+    }
+  }
+}
 ```
 
 ---

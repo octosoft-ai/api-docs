@@ -746,15 +746,23 @@ GET /api/v2/enrollee-visits?memberId=100004976
       ...(all other customer data provided during onboarding)
       "appointments": [
         {
-          "appointment_date": "2023-02-20 00:00:00",
-          "d_department": "DERMATOLOGY",
-          "provider_name": "ABC PHARMACY"
+          "authNumber": "30000XXXX",
+          "authType": "IP",
+          "requestedAmount": "3908.00",
+          "approvedAmount": "0.00",
+          "status": "Denied",
+          "authCreateDate": "2025-08-22 16:37:37",
+          "provider": "ABC HOSPITAL"
         },
         {
-          "appointment_date": "2024-12-10 00:00:00",
-          "d_department": "OPTOLOGY",
-          "provider_name": "ABC CLINIC"
-        }
+          "authNumber": "30000XXXX",
+          "authType": "OP",
+          "requestedAmount": "11600.00",
+          "approvedAmount": "11600.00",
+          "status": "Approved",
+          "authCreateDate": "2025-09-26 14:52:44",
+          "provider": "ABC PHARMACY"
+        },
       ]
     }
   }

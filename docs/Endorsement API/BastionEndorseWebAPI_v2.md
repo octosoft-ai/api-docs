@@ -276,7 +276,7 @@ GET /api/v2/vendors/plans/:id
   #### Notes:
   - If `preExistingCondition` is set to 1 (true), include an array of pre-existing condition IDs in the `conditions` field to specify the customer's pre-existing conditions.
   - If `preExistingCondition` is set to 0 (false), the `conditions` field can be omitted.
-  - In order for the users not to be sent any emails, kindly omitt the email field
+  - In order for the users not to be sent any emails, kindly omitt the email field. Same with phone numbers
 
 **Example Usage:**
 

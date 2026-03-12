@@ -382,8 +382,7 @@ GET /api/v2/vendors/policy-details/:reference
     - `bloodGroup` (type: number) - Blood group. Allowed values: [List of allowed blood groups].
     - `religion` (type: number) - Religion. Allowed values: [List of allowed religions].
     - `employeeId` (type: string) - Employee ID.
-    - `nationalId` (type: string) - National ID.
-    - `ninNumber` (type: string) - NIN (National Identification Number).
+    - `ninNumber` (type: string, required) - NIN (National Identification Number).
     - `height` (type: number) - Height.
     - `weight` (type: number) - Weight.
     - `externalRef` (type: string) - The customer's external reference or ID that uniquely identifies the customer on the vendor's platform.

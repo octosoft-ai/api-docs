@@ -2,7 +2,9 @@
 
 > **This is the official documentation for the Endorsement Web API.**
 >
-> **Important:** This API is strictly scoped to **endorsement-related operations only** and must not interact with endpoints outside the Endorsement API boundary (e.g., core Policy APIs).
+> **Important:**
+> - This API is strictly scoped to **endorsement-related operations only** and must not interact with endpoints outside the Endorsement API boundary (e.g., core Policy APIs).
+> - Due to rapid and continuous changes, the staging environment is not continuously available after go-live.
 
 ## Docs
 

@@ -2,7 +2,9 @@
 
 > **This is the official documentation for the Bastion Policy Web API.**
 >
-> **Important:** This API is strictly scoped to **policy-related operations only** and must not call or interact with **Endorsement Web API** endpoints.
+> **Important:** 
+> - This API is strictly scoped to **policy-related operations only** and must not call or interact with **Endorsement Web API** endpoints.
+> - Due to rapid and continuous changes, the staging environment is not continuously available after go-live.
 
 ---
 

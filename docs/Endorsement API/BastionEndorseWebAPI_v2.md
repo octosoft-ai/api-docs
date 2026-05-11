@@ -629,13 +629,58 @@ GET /api/v2/enrollee-auth-status?memberId=100004976
     "success": 1,
     "message": "Member Auth Status Details.",
     "member_auth": {
-      "auth_number": "3000XXXXX",
-      "message": "Dear Johm  Doe, an auth request 3000XXXXX from null, 1999-01-01 has been submitted for approval."
+      "member_name": "John  Doe",
+      "provider_name": "ABC Hospital",
+      "auth_number": "30000XXXX",
+      "auth_type": "OP",
+      "admission_date": null,
+      "discharge_date": null,
+      "service_date": "2026-04-16",
+      "admission_days": "null",
+      "status": "Approved",
+      "message": "Member Name: John  Doe\\nProvider: ABC Hospital\\nAuthorization Number: 30000XXXX\\nAuth Type: OP\\nAdmission Date: null\\nDischarge Date: null\\nService Date: 2026-04-16\\nDays Admitted: null\\nStatus: Approved"
     }
   }
 }
 ```
 
+**Example Usage**
+```http
+GET /api/v2/enrollee-auth-status?memberId=100004976&page=6&limit=3
+```
+
+**Example Response:**
+
+```json
+{
+  "status": true,
+  "data": {
+    "success": 1,
+    "message": "Member Auth Status Details.",
+    "member_auth": {
+      "member_name": "John  Doe",
+      "provider_name": "ABC Hospital",
+      "auth_number": "30000XXXX",
+      "auth_type": "OP",
+      "admission_date": null,
+      "discharge_date": null,
+      "service_date": "2026-04-16",
+      "admission_days": "null",
+      "status": "Approved",
+      "message": "Member Name: John  Doe\\nProvider: ABC Hospital\\nAuthorization Number: 30000XXXX\\nAuth Type: OP\\nAdmission Date: null\\nDischarge Date: null\\nService Date: 2026-04-16\\nDays Admitted: null\\nStatus: Approved"
+    }
+  },
+  "pagination": {
+    "current_page": 5,
+    "per_page": 3,
+    "total_records": 14,
+    "total_pages": 5,
+    "has_next": false,
+    "has_prev": true,
+    "from": 13,
+    "to": 14
+  }
+}
 ---
 
 ### 3.11 `Undo Multiple Deleted Member Endorsement`

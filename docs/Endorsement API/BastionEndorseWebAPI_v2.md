@@ -681,6 +681,8 @@ GET /api/v2/enrollee-auth-status?memberId=100004976&page=6&limit=3
     "to": 14
   }
 }
+```
+
 ---
 
 ### 3.11 `Undo Multiple Deleted Member Endorsement`

@@ -821,6 +821,95 @@ GET /api/v2/enrollee-visits?memberId=100004976
 
 ---
 
+### 3.13 `Get All Enrollees`
+- **Auth:** `Auth Type II`
+- **HTTP Method:** `GET`
+- **Endpoint:** `/api/v2/enrollee-all`
+- **Query Parameters:**:
+  - `page` - Specify page number if total page > 1 (default: 1)
+  - `limit` - Specify total number of records to send per page (default: 20)
+  - `term` - Specify a Search text to filter conditions by the condition name
+
+**Example Usage:**
+
+```http
+PATCH /api/v2/enrollee-all
+```
+**Example Response:**
+
+```json
+{
+  "status": true,
+  "data": {
+    "success": 1,
+    "message": "Member List.",
+    "policy_id": "XXXX",
+    "total_members": "1",
+    "members": [
+      {
+        "policy_no": "XXXXXXXXXXX",
+        "principal_id": "XXXXXX",
+        "first_name": "John",
+        "middle_name": "",
+        "last_name": "Doe",
+        "mm_member_id": "1000XXXX",
+        "phone": "",
+        "dob": "2000-05-10",
+        "age": "26",
+        "gender": "Male",
+        "relation": "Self",
+        "plan_name": "Jade",
+        "registration_date": "2026-04-27",
+        "address": "",
+        "city": "Eti-Osa",
+        "state": "Lagos",
+        "country": "Nigeria",
+        "status": "Active",
+        "subsidiary_name": null,
+        "standard_premium": "12480.50",
+        "relations": [
+          {
+            "policy_no": "XXXXXXXXXXX",
+            "principal_id": "XXXXXX",
+            "first_name": "Jane",
+            "middle_name": "",
+            "last_name": "Doe",
+            "mm_member_id": "1000XXXX",
+            "phone": "",
+            "dob": "2000-05-10",
+            "age": "26",
+            "gender": "Female",
+            "relation": "Daughter",
+            "plan_name": "Jade",
+            "registration_date": "2026-04-27",
+            "address": "",
+            "city": "Eti-Osa",
+            "state": "Lagos",
+            "country": "Nigeria",
+            "status": "Inactive_expired",
+            "subsidiary_name": null,
+            "standard_premium": "12480.50"
+          }
+        ]
+      }
+    ],
+    "pagination": {
+      "current_page": 1,
+      "per_page": 20,
+      "total_records": "1",
+      "total_pages": 1,
+      "has_next": false,
+      "has_prev": false,
+      "from": 1,
+      "to": 1
+    }
+  }
+}
+```
+
+
+---
+
 ## 4 Vendor API Config
 
 ### 4.1 `Update notification webhook URL`

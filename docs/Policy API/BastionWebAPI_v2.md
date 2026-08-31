@@ -222,80 +222,37 @@ GET /api/v2/vendors/member-details?reference=:reference
 
 ---
 
-### 2.4 `Get policy by paycode`
+### `Get policy details`
 
-- **Auth:** `Auth Type II`
+- **Auth Type:** `Auth Type II`
 - **HTTP Method:** `GET`
-- **Endpoint:** `/api/v2/vendors/get-policy/:payCode`
-- **Parameters:**
-  - `payCode` (required) - Payment code of the policy.
-
-**Example Usage:**
-
-```http
-GET /api/v2/vendors/get-policy/:payCode
-```
-
-**Example Response:**
-
-```json
-{
-    "statusCode": 200,
-    "message": "Policy Retrieved Successfully!",
-    "data": {
-        "amount": string,
-        "currency": "NGN",
-        "trx_ref": string,
-        "description": string,
-        "customer": {
-          "firstName": "John",
-          "lastName": "Doe",
-          "email": "john@doe.com"
-        }
-    }
-}
-```
-
----
-
-### 2.5 `Get policy details`
-
-- **Auth:** `Auth Type II`
-- **HTTP Method:** `GET`
-- **Endpoint:** `/api/v2/vendors/policy-details/:reference`
+- **Endpoint:** `/api/v2/webhook/vendors/policy-details?reference=:reference`
 - **Parameters:**
   - `reference` (required) - Policy reference.
 
 **Example Usage:**
 
 ```http
-GET /api/v2/vendors/policy-details/:reference
+GET /api/v2/webhook/vendors/policy-details/:reference
 ```
 
 **Example Response:**
 
 ```json
 {
-    "status": true,
-    "message": "Policy Details Retrieved Successfully!",
-    "data": {
-      "id": '007',
-      "firstName":string,
-      "lastName":string,
-      "email":string,
-      "phone":string,
-      "address":string,
-      "amount":string,
-      "plan_id": string,
-      "dateOfBirth": DateTime,
-      "preExistingConditions": json,
-      "status": string,
-      "startDate": DateTime,
-      "nextPaymentDate": DateTime,
-      "published_at": DateTime,
-      "created_at": DateTime,
-      "updated_at": DateTime,
-    }
+  "status": true,
+  "message": "Policy details fetched successfully!",
+  "data": {
+    "id": 1356,
+    "firstName": "John",
+    "lastName": "Doe",
+    "email": "john.doe@email.com",
+    "phone": "0123456789",
+    "address": "Lagos Nigeria ",
+    "amount": 1000000,
+    "plan_id": 6,
+    "preExistingConditions": null
+  }
 }
 ```
 
@@ -361,7 +318,7 @@ GET /api/v2/vendors/policy-details/:reference
 - **Endpoint:** `/api/v2/webhook/vendors`
 - **Request Body**:
   - `reference` (type: string, required) - Payment reference.
-  - `plan_id` (required).
+  - `plan_id` (type: string, required).
   - `paymentPlan` (type: number, required)
   - `isReactivatePolicy` (type: boolean).
   - `narration`
@@ -435,7 +392,6 @@ POST /api/v2/webhook/vendors
 - **Endpoint:** `/api/v2/vendors/config`
 - **Request Body**:
   - `webhookURL` (type: URI, required) - Vendor's notification webhookURL.
-  - `webhookAccessKey` (type: string) - Access key for request authorization
 
 **Example Usage:**
 

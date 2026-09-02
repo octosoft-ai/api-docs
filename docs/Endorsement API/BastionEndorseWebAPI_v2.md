@@ -249,6 +249,7 @@ GET /api/v2/vendors/plans/:id
   - `reference` (required).
   - `plan_id` (required).
   - `policyId` (required).
+  - `subsidiaryName` (type: string)
   - `customer` (type: object).
     - `firstName` (type: string, required) - First name.
     - `middleName` (type: string) - Middle name.

@@ -373,7 +373,47 @@ Bastion resolves the policy from the local member mapping and verifies that it b
 
 ---
 
-### 2.7 `Notify payment`
+### 2.7 `Upload member document`
+
+- **Auth:** `Auth Type II`
+- **HTTP Method:** `POST`
+- **Endpoint:** `/api/v2/vendors/policies/:policyId/members/:memberId/documents`
+- **Content-Type:** `multipart/form-data`
+- **Path Parameters:**
+  - `policyId` (required) - ERP policy identifier returned by member lookup or policy issuance.
+  - `memberId` (required) - Internal member identifier returned by member lookup.
+- **Form Fields:**
+  - `file` (required) - PDF, JPEG, or PNG file. Maximum configured size is 5 MB.
+  - `documentType` (required) - `national_id`, `passport`, or `other`.
+  - `documentNumber` (optional) - Stored encrypted and never returned.
+  - `expiresOn` (optional) - ISO date.
+  - `externalDocumentRef` (optional) - Vendor-provided idempotency reference.
+
+**Example Response:**
+
+```json
+{
+  "status": true,
+  "message": "Member document uploaded successfully!",
+  "data": {
+    "documentId": 481,
+    "memberId": "100020001",
+    "documentType": "passport",
+    "fileName": "passport.pdf",
+    "mimeType": "application/pdf",
+    "fileSize": 182430,
+    "externalDocumentRef": "DOC-10022",
+    "reviewStatus": "uploaded",
+    "uploadedAt": "2026-09-09T12:00:00+00:00"
+  }
+}
+```
+
+For all three operations, Bastion verifies that the authenticated vendor owns the supplied or resolved policy before requesting member data from ERP. Missing and non-owned resources both return `404` to prevent identifier enumeration.
+
+---
+
+### 2.8 `Notify payment`
 
 - **Enums**
 

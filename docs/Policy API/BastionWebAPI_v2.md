@@ -314,7 +314,66 @@ Cover status values are `active`, `inactive`
 
 ---
 
-### 2.6 `Notify payment`
+### 2.6 `Get member claims`
+
+- **Auth:** `Auth Type II`
+- **HTTP Method:** `GET`
+- **Endpoint:** `/api/v2/vendors/members/:memberId/claims`
+- **Path Parameters:**
+  - `memberId` (required) - Internal member identifier returned by member lookup.
+- **Query Parameters:**
+  - `page` (optional, default `1`).
+  - `limit` (optional, default `20`, maximum `100`).
+  - `status` (optional) - `pending`, `approved`, `paid`, or `rejected`.
+  - `from` and `to` (optional) - ISO dates used to filter the service or claim date.
+  - `includeItems` (optional, default `false`) - Include itemized claim lines when available.
+
+**Example Usage:**
+
+```http
+GET /api/v2/vendors/members/100020001/claims?page=1&limit=20&status=approved
+```
+
+Bastion resolves the policy from the local member mapping and verifies that it belongs to the authenticated vendor before requesting claims from ERP. The former policy-scoped path remains available as a compatibility alias.
+
+**Example Response:**
+
+```json
+{
+  "status": true,
+  "message": "Member claims retrieved successfully!",
+  "data": {
+    "memberId": "100020001",
+    "policyId": "1248901",
+    "claims": [
+      {
+        "claimId": "9821",
+        "claimNumber": "CLM-2026-9821",
+        "providerName": "Example Hospital",
+        "serviceDate": "2026-08-20",
+        "claimType": "online",
+        "status": "approved",
+        "requestedAmount": 25000,
+        "approvedAmount": 22000,
+        "paidAmount": 0,
+        "currency": "NGN"
+      }
+    ],
+    "pagination": {
+      "currentPage": 1,
+      "perPage": 20,
+      "totalRecords": 1,
+      "totalPages": 1,
+      "hasNext": false,
+      "hasPrevious": false
+    }
+  }
+}
+```
+
+---
+
+### 2.7 `Notify payment`
 
 - **Enums**
 

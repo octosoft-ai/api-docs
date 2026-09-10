@@ -222,18 +222,18 @@ GET /api/v2/vendors/member-details?reference=:reference
 
 ---
 
-### `Get policy details`
+### 2.4 `Get policy details`
 
 - **Auth Type:** `Auth Type II`
 - **HTTP Method:** `GET`
-- **Endpoint:** `/api/v2/webhook/vendors/policy-details?reference=:reference`
+- **Endpoint:** `/api/v2/vendors/policy-details?reference=:reference`
 - **Parameters:**
   - `reference` (required) - Policy reference.
 
 **Example Usage:**
 
 ```http
-GET /api/v2/webhook/vendors/policy-details/:reference
+GET /api/v2/vendors/policy-details?reference=:reference
 ```
 
 **Example Response:**
@@ -255,6 +255,62 @@ GET /api/v2/webhook/vendors/policy-details/:reference
   }
 }
 ```
+
+---
+
+### 2.5 `Lookup member details`
+
+- **Auth:** `Auth Type II`
+- **HTTP Method:** `GET`
+- **Endpoint:** `/api/v2/vendors/member-lookup`
+- **Query Parameters:** Provide exactly one of:
+  - `reference` - Existing Bastion payment or policy reference.
+  - `memberId` - Bastion or OctoHealth internal member identifier.
+  - `policyId` (optional) - Disambiguates a lookup when the identifier matches more than one policy owned by the authenticated vendor. When omitted, Bastion resolves the policy through the local member-to-policy and policy-to-vendor ownership relationships.
+  - `includeInactive` (optional, default `false`) - Include removed dependants when `true`.
+
+**Example Usage:**
+
+```http
+GET /api/v2/vendors/member-lookup?memberId=10000XXXX
+```
+
+**Example Response:**
+
+```json
+{
+  "status": true,
+  "message": "Member details retrieved successfully!",
+  "data": {
+    "memberId": "100020001",
+    "policyId": "1248901",
+    "policyNumber": "23409",
+    "externalRef": "VENDOR-A-012345",
+    "firstName": "John",
+    "middleName": "",
+    "lastName": "Doe",
+    "email": "john.doe@example.com",
+    "phone": "+2348012345678",
+    "dateOfBirth": "1990-01-15",
+    "gender": "Male",
+    "relation": "Self",
+    "planName": "Gold Plan",
+    "registrationDate": "2024-01-31",
+    "coverStatus": "active",
+    "dependants": [
+      {
+        "memberId": "100020002",
+        "firstName": "Jane",
+        "lastName": "Doe",
+        "relation": "Spouse",
+        "coverStatus": "active"
+      }
+    ]
+  }
+}
+```
+
+Cover status values are `active`, `inactive`
 
 ---
 
